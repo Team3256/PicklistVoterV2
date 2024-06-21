@@ -3,22 +3,15 @@ import {v4 as uuidv4} from 'uuid';
 import { TBA_API_KEY } from '$env/static/private';
 import { supabase } from '$lib/supabaseClient';
 import { redirect, fail } from '@sveltejs/kit';
+import type {Leaderboard3} from "$lib/types/types";
+
 
 export const load = (async () => {
     return {};
 }) satisfies PageServerLoad;
 
-
-interface databaseFormat {
-    leaderboard_code: string,
-    submissions: Array<any>,
-    teams: Array<any>,
-    name: string,
-    admin_session_id: any;
-
-}
-async function pushData(info: databaseFormat) {
-    const {error} = await supabase.from("Leaderboard Voter").insert(info)
+async function pushData(info: Leaderboard3) {
+    const {error} = await supabase.from('Leaderboard Voter 1.1').insert(info)
     if (error) {
         console.log(error)
     }
@@ -48,8 +41,8 @@ export const actions = {
 
         }
         const uuid:string = uuidv4();
-        const leaderboard_code: string = Math.floor(Math.random()*(999999-100000+1)+100000).toString();
-        const info: databaseFormat = {leaderboard_code, submissions:[], teams:data["rankings"], name, admin_session_id: uuid}
+        const leaderboard_code: number = Math.floor(Math.random()*(999999-100000+1)+100000);
+        const info: Leaderboard3 = {leaderboard_code, submissions:[], teams:data["rankings"], name, admin_session_id: uuid}
         pushData(info);
         throw redirect(307, `/create/${uuid}`);
 

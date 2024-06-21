@@ -1,11 +1,9 @@
 <script lang="ts">
-  import { enhance } from "$app/forms";
   import { onMount } from "svelte";
   import { invalidateAll } from "$app/navigation";
   import SubmissionRow from "./SubmissionRow.svelte";
   import {qr} from "@svelte-put/qr/svg";
 
-  export let form;
   export let data;
 
   onMount(() => {

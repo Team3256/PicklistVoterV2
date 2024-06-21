@@ -1,8 +1,4 @@
-<script lang="ts">
-  import { supabase } from "$lib/supabaseClient";
 
-
-</script>
 
 <svelte:head>
   <title>Picklist Voter</title>

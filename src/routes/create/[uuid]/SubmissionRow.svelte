@@ -1,9 +1,9 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
+  import type {Submissions} from "$lib/types/types";
 
-    export let submission;
-    export let index;
-    export let admin_session_id;
+    export let submission:Submissions;
+    export let admin_session_id:number;
 </script>
 
 <form method = "POST" id="delete" action="?/delete" use:enhance>

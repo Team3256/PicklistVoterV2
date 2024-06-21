@@ -4,7 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 import { redirect } from '@sveltejs/kit';
 
 export const load = (async ({params}) => {
-    const {data, error} = await supabase.from('Leaderboard Voter').select().eq("leaderboard_code", params.eventCode);
+    const {data, error} = await supabase.from('Leaderboard Voter 1.1').select().eq("leaderboard_code", params.eventCode);
     if (error) {
         console.log(error);
         throw new Error("Invalid Code")
@@ -27,12 +27,12 @@ export const actions = {
         if (teamList.length ==0) {
             throw new Error("No teams selected");
         }
-        const {data, error: fetchError} = await supabase.from('Leaderboard Voter').select().eq("leaderboard_code", eventCode);
+        const {data, error: fetchError} = await supabase.from('Leaderboard Voter 1.1').select().eq("leaderboard_code", eventCode);
         if (fetchError) {
             console.log("Fetch error" + fetchError);
             throw new Error("Failed to fetch data");
         }
-        const {error: submitError} = await supabase.from('Leaderboard Voter').update({submissions: [...(data[0]["submissions"]), {name:name, picks: teamList, weighting:1, id:uuidv4()}]}).eq("leaderboard_code", eventCode);
+        const {error: submitError} = await supabase.from('Leaderboard Voter 1.1').update({submissions: [...(data[0]["submissions"]), {name:name, picks: teamList, weighting:1, id:uuidv4()}]}).eq("leaderboard_code", eventCode);
         if (submitError) {
             console.log("Submit error" + submitError);
             throw new Error("Failed to submit data");

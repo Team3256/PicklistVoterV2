@@ -1,15 +1,16 @@
 import type { PageServerLoad } from './$types';
 import { supabase } from '$lib/supabaseClient';
+import type {Submissions} from "$lib/types/types";
 
 export const load = (async ({params}) => {
-    const {data, error} = await supabase.from('Leaderboard Voter').select().eq("leaderboard_code", params.eventCode);
+    const {data, error} = await supabase.from('Leaderboard Voter 1.1').select().eq("leaderboard_code", params.eventCode);
     if (error) {
         console.error(error);
         return {ranked:[]}
     }
     const score = new Map();
-    data[0]["submissions"].forEach((submission:any)=>{
-        submission["picks"].forEach((pick:any, index:number)=> {
+    data[0]["submissions"].forEach((submission: Submissions) => {
+        submission["picks"].forEach((pick: number, index: number) => {
             if (score.has(pick)) {
                 score.set(pick, score.get(pick) + (submission["weighting"] * (submission["picks"].length - index)));
             } else {

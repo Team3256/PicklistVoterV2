@@ -7,17 +7,17 @@
   import DragDropList, {
     VerticalDropZone,
     reorder,
-    HorizontalDropZone,
-    HorizontalCenterDropZone,
     type DropEvent,
   } from "svelte-dnd-list";
   import Card from "./Card.svelte";
-  import type { Team } from "$lib/types/+team";
+  // import type { Team } from "$lib/types/+team";
   import { enhance } from "$app/forms";
+  import type {Teams} from "$lib/types/types";
+
 
   export let data;
 
-  $: teamNum = data?.teams as Team[];
+  $: teamNum = data.teams as Teams[];
 
   let teamNumList: DragDropList;
 
